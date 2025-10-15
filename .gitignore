@@ -23,7 +23,7 @@ pip-wheel-metadata/
 # Optionally strip outputs on commit with nbstripout
 
 # Data
-data/raw/*
+# data/raw/*
 data/external/*
 !data/**/.gitkeep
 # Keep small sample data if needed:
