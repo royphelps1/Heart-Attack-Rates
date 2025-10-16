@@ -12,7 +12,7 @@ Collaborative repo for our DSCI 511 course project (Jupyter + LaTeX). Private re
 - **Google Drive Folder (large data / alternate option):** [(https://drive.google.com/drive/folders/1vawtjJAgRlAttClKjX46eAY9A2p-jNFe?usp=share_link)]
 - **GitHub Repo (main code/paper hub):** [(https://github.com/royphelps1/DSCI-511-Project)]
 
-## TL;DR
+## TD
 - Code and notebooks go in the folders listed below.
 - Upload files directly on the GitHub website into the correct folder (see “Collaboration Workflow”).
 - Large data lives only in the shared Google Drive folder, not in GitHub.
