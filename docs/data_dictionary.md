@@ -32,3 +32,60 @@ This table lists the columns as detected, with inferred types and quick examples
 | Previous_Heart_Attack  | text/categorical  |           0 |        2 | No, Yes                                       | `No` (215306), `Yes` (23960)                                                                                                                           |
 | CVD_Risk_Score         | numeric           |           0 |       90 | 10 – 99                                       |                                                                                                                                                        |
 | Heart_Attack           | text/categorical  |           0 |        2 | No, Yes                                       | `No` (210195), `Yes` (29071)                                                                                                                           |
+
+---
+
+## Normalized Columns (Phase 1 Additions)
+
+These fields come from the raw data and will be added during preprocessing to make analysis and modeling easier. We are not introducing new medical facts.
+
+###  Boolean flags (derived from existing columns)
+
+| New column         | Source column        | Rule / values                       | Type    |
+|--------------------|-----------------------|-------------------------------------|---------|
+| has_hypertension   | Hypertension          | Yes → True, No → False              | boolean |
+| has_diabetes       | Diabetes              | Yes → True, No → False              | boolean |
+| has_dyslipidemia   | Cholesterol_Level     | High → True, Low/Normal → False     | boolean |
+| is_smoker          | Smoking_Status        | Smoker → True, Non-Smoker → False   | boolean |
+| is_obese           | Obesity               | Yes → True, No → False              | boolean |
+| tcm_use            | TCM_Use               | Yes → True, No → False              | boolean |
+| is_rural           | Rural_or_Urban        | Rural → True, Urban → False         | boolean |
+
+---
+
+###  Ordinal encodings (stored as integers)
+
+These columns will be mapped to ordered numeric values for Phase 1 EDA and later modeling:
+
+- **Air_Pollution_Exposure:** Low = 0, Medium = 1, High = 2  
+- **Physical_Activity:** Low = 0, Moderate = 1, High = 2  
+- **Diet_Score:** Poor = 0, Moderate = 1, Healthy = 2  
+- **Healthcare_Access:** Poor = 0, Moderate = 1, Good = 2  
+- **Hospital_Availability:** Low = 0, Medium = 1, High = 2  
+- **Income_Level:** Low = 0, Middle = 1, High = 2  
+
+---
+
+
+
+### Missing data handling
+
+We will apply the following approach in the preprocessing notebook:
+
+- **Categorical:** fill with `"Unknown"` or mode   
+- **Numeric:** median fill  
+
+Note: In our sample, `Education_Level` may include some missing values. We will re-check and update the Missing % in this dictionary if needed.
+
+---
+
+### Note on data leakage
+
+`CVD_Risk_Score` stays in the dataset for EDA, but we will **exclude it from any baseline predictive modeling in Phase 2** unless confirmed safe.
+
+---
+
+### Output location
+
+After normalization, we will save the processed file to:  
+`data/processed/heart_attack_china_enriched.csv`

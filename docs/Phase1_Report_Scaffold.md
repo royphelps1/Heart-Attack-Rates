@@ -18,7 +18,7 @@ enables (e.g., risk factors associated with heart attacks across regions).
 - Why this dataset is suitable for Phase-1 (size, features, label, region fields)
 
 ## 4) Data Sample & Dictionary
-Paste a small sample (10–20 rows) and link to your data dictionary.
+Paste a small sample (10–20 rows) and link to our docs.
 
 ```python
 import pandas as pd
@@ -26,28 +26,44 @@ pd.set_option("display.max_columns", None)
 df = pd.read_csv("data/raw/heart_attack_china.csv", low_memory=False)
 df.head(10)
 ```
+
 - **Data dictionary:** see `docs/data_dictionary.md`
+- **Normalized flags & encodings (what we add in Phase 1):** see `docs/normalized_flags.md`
 
 ## 5) Provenance & Access
 - Source, license/terms, de-identification.  
 - How others can obtain or access (file location in repo and any usage notes).
 
 ## 6) Limitations & Improvements
-- Missingness, potential biases, lack of time fields, measurement units, etc.  
-- Planned improvements: add `record_date` (synthetic), derive flags, optional external benchmarks.
+- **Missingness & cleanliness:** Some categorical fields (e.g., `Education_Level`) may contain missing values; we will standardize text categories (trim/case) and apply simple imputations (categorical → "Unknown"/mode; numeric → median).
+- **Type casting:** Ensure `Age`, `Blood_Pressure`, and `CVD_Risk_Score` are numeric; review outliers.
+- **Normalization (Phase 1):** Convert existing text fields into booleans/ordinals (e.g., `has_hypertension`, `has_diabetes`, `has_dyslipidemia`, `is_smoker`, `is_obese`, `tcm_use`, `is_rural`; plus ordinal encodings for pollution, activity, diet, access, hospital availability, income). Documented in `docs/normalized_flags.md`.
+- **Leakage caution:** Keep `CVD_Risk_Score` for EDA but **exclude from baseline modeling** in Phase 2 unless proven safe.
+- **(Optional, later) Time fields:** We may add a synthetic `record_date` **after** Phase 1 if needed for time-based visuals.
 
 ## 7) Enrichment Plan (Optional for Phase-1)
-- Geo present → potential joins with public health indicators (population, PM2.5, beds/1k, GDP/cap).  
-- Document keys needed for joins (province/city standardization).
+- Possible joins after Phase-1 write-out: public health indicators (population, PM2.5, hospital beds/1k, GDP per capita).
+- Keys needed: province/city standardization for reliable joins.
 
 ## 8) Reproducibility
 How to rebuild processed data from raw:
-```python
-# scripts shown inline for Phase-1:
-# 1) derive risk flags + synthetic record_date
-# (Paste from docs_derived_risk_flags.md or import from a 'src/' script)
-```
-- Folder layout and exact commands to run.
+
+**Inputs**
+- `data/raw/heart_attack_china.csv`
+
+**Steps (Phase 1)**
+1) **Normalize flags & ordinals** per `docs/normalized_flags.md`
+2) **Type cast** `Age`, `Blood_Pressure`, `CVD_Risk_Score` to numeric (with coercion); review outliers
+3) **Standardize categories** (trim/case)
+4) **Handle missingness** (categorical → "Unknown"/mode; numeric → median)
+5) **Sanity checks** (class balance for `Heart_Attack`, value ranges, category counts)
+6) **Write out** → `data/processed/heart_attack_china_enriched.csv`
+
+**Folder layout & commands**
+- See `README.md` for project structure and “how to run” instructions.
+- Documentation for the mappings lives in `docs/normalized_flags.md`.
+
+## Appendix A: Figures/Tables to Include Later
 
 ## Appendix A: Figures/Tables to Include Later
 - Size tables, missingness heatmap, distributions, bivariate plots.

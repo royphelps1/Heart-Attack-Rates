@@ -1,5 +1,18 @@
 # DSCI-511 Project
 
+## Phase 1 Dataset & Documentation
+
+This repository currently uses the following dataset and documentation for Phase 1:
+
+- **Dataset:** `heart_attack_china.csv` (stored in `data/raw/`)
+- **Data Dictionary:** `docs/data_dictionary.md`
+- **Normalized Variables Plan:** `docs/normalized_flags.md`
+- **Phase 1 Report Scaffold:** `docs/Phase1_Report_Scaffold.md`
+
+The cleaned/enriched output for Phase 1 will be written to:
+`data/processed/heart_attack_china_enriched.csv`
+
+
 Collaborative repo for our DSCI 511 course project (Jupyter + LaTeX). Private repo shared by a 4-person team.
 
 **TEAM:**
@@ -12,11 +25,10 @@ Collaborative repo for our DSCI 511 course project (Jupyter + LaTeX). Private re
 - **Google Drive Folder (large data / alternate option):** [(https://drive.google.com/drive/folders/1vawtjJAgRlAttClKjX46eAY9A2p-jNFe?usp=share_link)]
 - **GitHub Repo (main code/paper hub):** [(https://github.com/royphelps1/DSCI-511-Project)]
 
-## TD
+## Note
 - Code and notebooks go in the folders listed below.
-- Upload files directly on the GitHub website into the correct folder (see “Collaboration Workflow”).
-- Large data lives only in the shared Google Drive folder, not in GitHub.
-- Paper is written in LaTeX at `reports/paper/main.tex`; figures/tables under `reports/`.
+- Upload files directly on the GitHub website into the correct folder.
+- Paper is written in LaTeX or Jupyter Markdown, which ever is required `reports/paper/..`; figures/tables under `reports/`.
 - Everyone may also work from the shared Google Drive folder if preferred; keep the same structure there.
 
 ## Repo Structure
@@ -48,27 +60,21 @@ Collaborative repo for our DSCI 511 course project (Jupyter + LaTeX). Private re
 - Drop your files:
   - Notebooks → `notebooks/`
   - Python helpers → `src/` (create a subfolder if needed)
-  - LaTeX sections/images → `reports/paper/` and `reports/figures/`
+  - LaTeX sections or Jupyter Markdown/images → `reports/paper/` and `reports/figures/`
   - References → `references/`
   - Screenshots/docs → `docs/`
 - Add a short commit message and **Commit changes**.
-- **Do not upload large data** — put it in the shared Google Drive folder.
 
-> Tip: If you later want to use GitHub Desktop or the command line, that’s fine, but it’s optional.
 
 ## Jupyter Notebooks
 - Use Jupyter Notebook or JupyterLab locally.
 - Save your notebooks in `notebooks/` and push them to GitHub.
 - In the shared Google Drive folder, keep the same folder names so it’s easy to sync.
 
-## LaTeX Paper
-- Main file: `reports/paper/main.tex`
-- Add figures to `reports/figures/` and reference with `\includegraphics{../figures/your_figure}`
-- BibTeX file: `references/references.bib`
-- You can edit `.tex` files online or locally with a LaTeX editor.
-- Optional build locally:
-  ```bash
-  latexmk -pdf -interaction=nonstopmode reports/paper/main.tex
+## Paper
+- Main file: `reports/paper/..`
+- Add figures to `reports/figures/`.
+- 
 ## Code Style
 - Keep reusable logic in src/ and import into notebooks.
 - If adding tests, place them in tests/ with pytest style.
