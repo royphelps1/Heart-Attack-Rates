@@ -62,7 +62,7 @@ These columns will be mapped to ordered numeric values for Phase 1 EDA and later
 - **Diet_Score:** Poor = 0, Moderate = 1, Healthy = 2  
 - **Healthcare_Access:** Poor = 0, Moderate = 1, Good = 2  
 - **Hospital_Availability:** Low = 0, Medium = 1, High = 2  
-- **Income_Level:** Low = 0, Middle = 1, High = 2  
+
 
 ---
 
