@@ -35,18 +35,18 @@ Collaborative repo for our DSCI 511 course project (Jupyter + LaTeX). Private re
 
 ```text
 .
-├── notebooks/           # Jupyter notebooks (EDA, experiments)
+├── notebooks/           # Jupyter notebooks 
 ├── src/                 # Python modules reusable across notebooks
 ├── tests/               # Optional unit tests for src
 ├── data/
-│   ├── raw/             # Original, immutable data dumps (not tracked by Git)
-│   ├── processed/       # Cleaned/engineered data (not tracked by Git)
+│   ├── raw/             # Original, immutable data dumps 
+│   ├── processed/       # Cleaned/engineered data 
 │   └── external/        # Third-party data (not tracked by Git)
 ├── reports/
-│   ├── paper/           # LaTeX paper (main.tex)
+│   ├── paper/           # LaTeX paper (main.tex), or Jupyter markdown
 │   ├── figures/         # Saved plots/diagrams
-│   └── tables/          # Exported CSV/LaTeX tables
-├── references/          # BibTeX (references.bib), notes
+│   └── tables/          # Exported CSV/LaTeX tables, or other formats
+├── references/          # BibTeX (references.bib), notes, or in-line markdown
 ├── docs/                # Extra documentation (e.g., screenshots)
 ├── environment.yml      # Optional reproducible Conda environment
 ├── CONTRIBUTING.md      # Team workflow and conventions
