@@ -61,3 +61,5 @@ Icon?
 .Trashes
 .DS_Store
 .ipynb_checkpoints/
+
+data/processed/china_heart_attack_analysis.geojson
