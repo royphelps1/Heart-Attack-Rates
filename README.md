@@ -9,8 +9,72 @@ This repository currently uses the following dataset and documentation for Phase
 - **Normalized Variables Plan:** `docs/normalized_flags.md`
 - **Phase 1 Report Scaffold:** `docs/Phase1_Report_Scaffold.md`
 
-The cleaned/enriched output for Phase 1 will be written to:
+The cleaned/enriched output for Phase 1 is written to:  
 `data/processed/heart_attack_china_enriched.csv`
+
+Phase 1 focuses on:
+- Initial cleaning of the heart_attack_china dataset  
+- Creating derived flags (e.g., SBP_missing, SBP_hypertensive, gender simplification)  
+- Building baseline CVD risk features and documenting all variables  
+
+
+## Phase 2 – WHO Integration, Merging, & Spatial Analysis
+
+Phase 2 extends the project by integrating WHO blood pressure data and geospatial information to explore **province-level heart attack risk patterns** across China.
+
+**Key Phase 2 Inputs:**
+- Phase 1 enriched file: `data/processed/heart_attack_china_enriched.csv`
+- WHO mean blood pressure data (merged into the analysis-ready dataset)
+- External China provincial boundary GeoJSON from Kaggle:
+  - `data/external/gadm36_CHN_1.json` (GADM-based province polygons)
+
+**Main Phase 2 Notebook:**
+- `notebooks/phase2_all_in_notebook.ipynb`
+
+This notebook:
+- Merges WHO data into the main dataset  
+- Normalizes province names for joining with the GeoJSON  
+- Produces two main tabular outputs:
+  - `data/processed/heart_attack_china_analysis_ready.csv`
+  - `data/processed/heart_attack_china_model_ready.csv`
+- Aggregates patient-level records to **province-level metrics**:
+  - `heart_attack_rate`
+  - `mean_sbp`
+  - `mean_cvd_risk`
+- Builds province-level GeoDataFrames using **GeoPandas**
+- Generates choropleth maps and basemap overlays using **contextily** (OpenStreetMap)
+
+**Large GeoJSON Note:**
+
+During Phase 2, a large, patient-level GeoJSON file may be created:
+
+- `data/processed/china_heart_attack_analysis.geojson` (≈760MB)
+
+This file is **intentionally not tracked** in Git due to GitHub’s 100MB limit and is listed in `.gitignore`.  
+It can be regenerated at any time by running the Phase 2 notebook.
+
+**Figures (Maps & Visualizations):**
+
+- All maps/plots from Phase 2 are saved to:  
+  `reports/figures/`
+
+Examples include:
+- `heart_attack_rate_by_province.png`
+- `mean_sbp_by_province.png`
+- `heart_attack_rate_with_basemap.png`
+- `mean_sbp_with_basemap.png`
+
+These are **not stored in Git** (the `reports/figures/` directory is ignored) but can be reproduced by re-running the notebook.
+
+**Reproducibility Summary:**
+
+To reproduce Phase 2 outputs:
+
+1. Open and run `notebooks/phase2_all_in_notebook.ipynb` from top to bottom.
+2. This will:
+   - Regenerate the analysis/model-ready CSVs
+   - Recreate the GeoDataFrames
+   - Regenerate all spatial figures in `reports/figures/`
 
 
 Collaborative repo for our DSCI 511 course project (Jupyter + LaTeX). Private repo shared by a 4-person team.
@@ -22,63 +86,33 @@ Collaborative repo for our DSCI 511 course project (Jupyter + LaTeX). Private re
 - Roy Phelps
 
 **Project Resources:**
-- **Google Drive Folder (large data / alternate option):** [(https://drive.google.com/drive/folders/1vawtjJAgRlAttClKjX46eAY9A2p-jNFe?usp=share_link)]
-- **GitHub Repo (main code/paper hub):** [(https://github.com/royphelps1/DSCI-511-Project)]
+- **Google Drive Folder (large data / alternate option):** (https://drive.google.com/drive/folders/1vawtjJAgRlAttClKjX46eAY9A2p-jNFe?usp=share_link)
+- **GitHub Repo (main code/paper hub):** (https://github.com/royphelps1/DSCI-511-Project)
 
 ## Note
 - Code and notebooks go in the folders listed below.
-- Upload files directly on the GitHub website into the correct folder.
-- Paper is written in LaTeX or Jupyter Markdown, which ever is required `reports/paper/..`; figures/tables under `reports/`.
+- Upload files directly on the GitHub website into the correct folder if working via browser.
+- Paper is written in LaTeX or Jupyter Markdown, whichever is required, under `reports/paper/`; figures/tables under `reports/`.
 - Everyone may also work from the shared Google Drive folder if preferred; keep the same structure there.
 
 ## Repo Structure
 
 ```text
 .
-├── notebooks/           # Jupyter notebooks (EDA, experiments)
+├── notebooks/           # Jupyter notebooks (EDA, cleaning, Phase 1 & Phase 2 pipelines)
 ├── src/                 # Python modules reusable across notebooks
 ├── tests/               # Optional unit tests for src
 ├── data/
 │   ├── raw/             # Original, immutable data dumps 
-│   ├── processed/       # Cleaned/engineered data
-│   └── external/        # Third-party data 
+│   ├── processed/       # Cleaned/engineered data (Phase 1 & Phase 2 outputs)
+│   └── external/        # Third-party data (e.g., China province GeoJSON)
 ├── reports/
-│   ├── paper/           # LaTeX paper or Python markdown
-│   ├── figures/         # Saved plots/diagrams
+│   ├── paper/           # LaTeX paper or Jupyter/Markdown report
+│   ├── figures/         # Saved plots/diagrams (generated by notebooks, ignored by Git)
 │   └── tables/          # Exported CSV/LaTeX tables or Python exports
-├── references/          # BibTeX (references.bib) or in Python markdown
-├── docs/                # Extra documentation (e.g., screenshots)
+├── references/          # BibTeX (references.bib) or Markdown references
+├── docs/                # Extra documentation (e.g., screenshots, scaffolds)
 ├── environment.yml      # Optional reproducible Conda environment
 ├── CONTRIBUTING.md      # Team workflow and conventions
 └── .gitignore
-```
 
-
-## Collaboration Workflow (via GitHub Website)
-- Go to the repo on GitHub and **navigate into the correct folder** first.
-- Click **Add file → Upload files**.
-- Drop your files:
-  - Notebooks → `notebooks/`
-  - Python helpers → `src/` (create a subfolder if needed)
-  - LaTeX sections or Jupyter Markdown/images → `reports/paper/` and `reports/figures/`
-  - References → `references/`
-  - Screenshots/docs → `docs/`
-- Add a short commit message and **Commit changes**.
-
-
-## Jupyter Notebooks
-- Use Jupyter Notebook or JupyterLab locally.
-- Save your notebooks in `notebooks/` and push them to GitHub.
-- In the shared Google Drive folder, keep the same folder names so it’s easy to sync.
-
-## Paper
-- Main file: `reports/paper/..`
-- Add figures to `reports/figures/`.
-- 
-## Code Style
-- Keep reusable logic in src/ and import into notebooks.
-- If adding tests, place them in tests/ with pytest style.
-- Use Python 3.x (an optional Conda environment is defined in environment.yml for consistency, but it’s not required if you already have Python installed).
-
-## License
-- Private class project.  Do not distribute without team consent.
