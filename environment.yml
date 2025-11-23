@@ -11,5 +11,9 @@ dependencies:
   - scikit-learn
   - scipy
   - pip
+  - beautifulsoup4
   - pip:
       - nbstripout
+      - osmnx
+      - geopandas
+      - geojson
