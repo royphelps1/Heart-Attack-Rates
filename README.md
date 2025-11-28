@@ -264,8 +264,6 @@ Code used to generate derived datasets is included within this repository to ens
 
 ## Project Resources
 
-- **Google Drive (large files & collaboration):**  
-https://drive.google.com/drive/folders/1vawtjJAgRlAttClKjX46eAY9A2p-jNFe?usp=share_link
 
 - **GitHub Repository:**  
 https://github.com/royphelps1/DSCI-511-Project
