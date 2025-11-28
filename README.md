@@ -89,7 +89,7 @@ Examples:
 - `mean_sbp_with_basemap.png`
 - `urban_rural_centroids_with_labels.png`
 
-> These are intentionally not tracked in Git to avoid file size limits and because they are reproducible.
+
 
 ---
 
@@ -99,10 +99,156 @@ A large patient-level GeoJSON file may be generated:
 
 data/processed/china_heart_attack_analysis.geojson (~760MB)
 
+This file is:
+- Excluded from Git via `gitignore`
+- Regeneraged automaticaly from the notebook
+- Indended only for visualization aand spatial exploration
+
+---
+
+## Reproducibility the Notebook
 notebooks/phase2_all_in_notebook.ipynb
 
 2. Run the notebook from top to bottom.
 3. Outputs will be written automatically to:
+
+data/processed/
+reports/figures/
+
+---
+
+## Team
+
+**DSCI-511 Project Team:**
+- Evan Wessel  
+- Leland Weeks  
+- Shad Scarboro  
+- Roy Phelps  
+
+---
+
+## Project Resources
+
+- **GitHub Repository:**  
+https://github.com/royphelps1/DSCI-511-Project
+
+
+---
+
+# Project References & Data Sources
+
+This project integrates medical data, geographic reference data, and programmatically generated spatial data to support analysis and visualization.
+
+---
+
+## 1. Heart Attack China Dataset
+**Source:** Kaggle  
+**Description:**  
+Dataset containing provincial-level heart attack indicators and related health factors across China, including urban vs rural classification.
+
+Used for:
+- Primary analysis
+- Risk-factor exploration
+- Aggregations and statistical analysis
+
+Original source credited on Kaggle.
+
+---
+
+## 2. China Province Boundaries (GADM v3.6)
+**Source:** Kaggle (GADM Database of Global Administrative Areas)  
+**File:** `gadm36_CHN_1.json`  
+
+**Description:**  
+This dataset provides official geographic boundaries for China’s first-level administrative divisions (provinces). The dataset was used strictly for visualization and spatial context.
+
+Used for:
+- Background map layer
+- Geographic reference when plotting centroids
+
+Reference:
+https://gadm.org
+
+---
+
+## 3. Wikipedia – Administrative Divisions
+**Source:** Wikipedia  
+
+Used to extract province and capital information:
+
+| Page | Purpose |
+|------|---------|
+| *Provinces of China* | Province names and largest cities |
+| *Autonomous regions of China* | Autonomous regions and capitals |
+| *Direct-administered municipalities* | Municipalities and capital cities |
+
+Data accessed via Wikipedia REST API and parsed programmatically.
+
+---
+
+## 4. OpenStreetMap / OSMnx
+**Source:** OpenStreetMap via Python OSMnx library  
+**Library:** `osmnx`  
+
+**Description:**  
+Used to geocode province names and capitals and extract centroid coordinates for:
+
+- Rural province centers  
+- Urban city centers  
+
+Used for:
+- Generating custom GeoJSON centroid dataset  
+- Latitude/Longitude calculations  
+
+Website:
+https://www.openstreetmap.org  
+Library documentation:
+https://osmnx.readthedocs.io
+
+---
+
+## 5. Custom Spatial Dataset (This Project)
+**File:** `urban_or_rural_centroids.geojson`  
+
+**Description:**  
+This GeoJSON file was **generated within this project** using:
+
+- Wikipedia data  
+- OpenStreetMap geocoding  
+- GeoPandas  
+- OSMnx  
+
+Contains:
+- Province name  
+- Urban vs Rural flag  
+- Longitude / Latitude coordinate pairs  
+
+Purpose:
+- Provides centroid coordinates for each province and urban / rural region  
+- Enables geospatial visualization
+
+---
+
+## 6. Python Libraries Used
+
+| Library | Purpose |
+|----------|----------|
+| pandas | Data processing and merging |
+| geopandas | Spatial analysis and mapping |
+| osmnx | Geocoding and centroid extraction |
+| shapely | Geometry creation |
+| matplotlib | Plotting and visualization |
+| beautifulsoup4 | Web scraping and HTML parsing |
+| requests | API requests |
+| geojson | Writing GeoJSON output |
+
+---
+
+## Notes on Data Usage
+
+All external datasets were used for academic purposes only and for demonstration and learning within a university project context.
+
+Code used to generate derived datasets is included within this repository to ensure reproducibility.
 
 ---
 
@@ -146,4 +292,3 @@ https://github.com/royphelps1/DSCI-511-Project
 ├── environment.yml      # Optional Conda environment
 ├── CONTRIBUTING.md      # Team workflow
 └── .gitignore
-
