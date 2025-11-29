@@ -54,6 +54,8 @@ reports/tables/*
 .vscode/
 .idea/
 *.code-workspace
+*.Rhistory
+
 
 # OS-specific
 Icon?
