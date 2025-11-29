@@ -39,21 +39,21 @@ This table lists the columns as detected, with inferred types and quick examples
 
 These fields come from the raw data and will be added during preprocessing to make analysis and modeling easier. We are not introducing new medical facts.
 
-###  Boolean flags (derived from existing columns)
+### Boolean flags (derived from existing columns)
 
-| New column         | Source column        | Rule / values                       | Type    |
-|--------------------|-----------------------|-------------------------------------|---------|
-| has_hypertension   | Hypertension          | Yes → True, No → False              | boolean |
-| has_diabetes       | Diabetes              | Yes → True, No → False              | boolean |
-| has_dyslipidemia   | Cholesterol_Level     | High → True, Low/Normal → False     | boolean |
-| is_smoker          | Smoking_Status        | Smoker → True, Non-Smoker → False   | boolean |
-| is_obese           | Obesity               | Yes → True, No → False              | boolean |
-| tcm_use            | TCM_Use               | Yes → True, No → False              | boolean |
-| is_rural           | Rural_or_Urban        | Rural → True, Urban → False         | boolean |
+| New column       | Source column        | Rule / values                       | Type    |
+|------------------|----------------------|-------------------------------------|---------|
+| has_hypertension | Hypertension         | Yes → True, No → False              | boolean |
+| has_diabetes     | Diabetes             | Yes → True, No → False              | boolean |
+| has_dyslipidemia | Cholesterol_Level    | High → True, Low/Normal → False     | boolean |
+| is_smoker        | Smoking_Status       | Smoker → True, Non-Smoker → False   | boolean |
+| is_obese         | Obesity              | Yes → True, No → False              | boolean |
+| tcm_use          | TCM_Use              | Yes → True, No → False              | boolean |
+| is_rural         | Rural_or_Urban       | Rural → True, Urban → False         | boolean |
 
 ---
 
-###  Ordinal encodings (stored as integers)
+### Ordinal encodings (stored as integers)
 
 These columns will be mapped to ordered numeric values for Phase 1 EDA and later modeling:
 
@@ -63,17 +63,14 @@ These columns will be mapped to ordered numeric values for Phase 1 EDA and later
 - **Healthcare_Access:** Poor = 0, Moderate = 1, Good = 2  
 - **Hospital_Availability:** Low = 0, Medium = 1, High = 2  
 
-
 ---
-
-
 
 ### Missing data handling
 
 We will apply the following approach in the preprocessing notebook:
 
-- **Categorical:** fill with `"Unknown"` or mode   
-- **Numeric:** median fill  
+- **Categorical:** fill with `"Unknown"` or mode  
+- **Numeric:** median fill (computed per column after outlier handling)  
 
 Note: In our sample, `Education_Level` may include some missing values. We will re-check and update the Missing % in this dictionary if needed.
 
@@ -83,9 +80,52 @@ Note: In our sample, `Education_Level` may include some missing values. We will 
 
 `CVD_Risk_Score` stays in the dataset for EDA, but we will **exclude it from any baseline predictive modeling in Phase 2** unless confirmed safe.
 
+Province-level aggregations are used strictly for visualization and exploratory analysis, not for patient-level prediction.
+
 ---
 
 ### Output location
 
 After normalization, we will save the processed file to:  
 `data/processed/heart_attack_china_enriched.csv`
+
+---
+
+## Phase 2 – Province-Level & WHO-Enhanced Variables
+
+In Phase 2, we aggregate the patient-level dataset to province level and join World Health Organization (WHO) indicators. The main province-level variables are:
+
+The variable `mean_sbp` is derived from the raw `Blood_Pressure` field and reflects province-level averages.
+
+| Variable Name       | Type   | Units      | Description                                              | Source                   |
+|---------------------|--------|------------|----------------------------------------------------------|--------------------------|
+| Province            | string | –          | Province name (standardized, matches GADM/WHO naming)    | Derived from raw         |
+| heart_attack_rate   | float  | proportion | Proportion of patients with Heart_Attack = Yes           | Aggregated from patients |
+| mean_sbp            | float  | mmHg       | Mean systolic blood pressure per province                | Aggregated from patients |
+| mean_cvd_risk       | float  | score      | Mean CVD_Risk_Score per province                         | Aggregated from patients |
+| who_mean_sbp_male   | float  | mmHg       | WHO-reported mean SBP for males in the province          | WHO dataset              |
+| who_mean_sbp_female | float  | mmHg       | WHO-reported mean SBP for females in the province        | WHO dataset              |
+
+These fields appear in the following Phase 2 outputs:
+
+- `data/processed/heart_attack_china_analysis_ready.csv`
+- `data/processed/heart_attack_china_model_ready.csv`
+- `data/processed/heart_attack_china_with_who_latest_by_sex.csv`
+
+---
+
+## Phase 2 – Spatial & Centroid Variables
+
+We also generate spatial datasets for mapping and centroids:
+
+| Variable Name | Type   | Units   | Description                                           | Source                            |
+|---------------|--------|---------|-------------------------------------------------------|-----------------------------------|
+| geometry      | object | –       | Province polygon geometry (used in GeoDataFrames)    | `data/external/gadm36_CHN_1.json` |
+| centroid_lon  | float  | degrees | Longitude of province centroid                        | Derived via OSMnx/Wikipedia       |
+| centroid_lat  | float  | degrees | Latitude of province centroid                         | Derived via OSMnx/Wikipedia       |
+| centroid_type | string | –       | Whether centroid represents an urban or rural center  | Derived (values: `Urban`, `Rural`)|
+
+These fields are written to:
+
+- `data/processed/urban_or_rural_centroids.geojson`
+- `data/processed/heart_attack_china_with_centroids.geojson`
