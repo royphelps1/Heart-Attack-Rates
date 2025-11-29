@@ -24,7 +24,7 @@ pip-wheel-metadata/
 
 # Data
 # data/raw/*
-data/external/*
+#data/external/*
 !data/**/.gitkeep
 # Keep small sample data if needed:
 # !data/raw/sample_*.csv
@@ -32,7 +32,7 @@ data/external/*
 # Build / Reports
 build/
 dist/
-reports/figures/*
+#reports/figures/*
 reports/tables/*
 !reports/**/.gitkeep
 
