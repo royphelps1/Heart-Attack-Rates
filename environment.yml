@@ -10,6 +10,7 @@ dependencies:
   - matplotlib
   - scikit-learn
   - scipy
+  - requests
   - pip
   - beautifulsoup4
   - pip:
@@ -17,3 +18,4 @@ dependencies:
       - osmnx
       - geopandas
       - geojson
+      - contextily
