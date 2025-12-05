@@ -84,10 +84,35 @@ Province-level aggregations are used strictly for visualization and exploratory 
 
 ---
 
-### Output location
+## Output Files
 
-After normalization, we will save the processed file to:  
-`data/processed/heart_attack_china_enriched.csv`
+The preprocessing and integration workflows produce the following outputs, written to `data/processed/`:
+
+### Phase 1 Output
+- `heart_attack_china_enriched.csv`  
+  Cleaned and normalized patient-level dataset with derived flags and ordinal encodings.
+
+### Phase 2 Outputs
+- `heart_attack_china_analysis_ready.csv`  
+  Province-enhanced dataset suitable for descriptive statistics, mapping, and exploratory analysis.
+
+- `heart_attack_china_model_ready.csv`  
+  Future-use dataset containing a subset of variables suitable for predictive modeling (not used in Phase 2 analysis but retained for completeness).
+
+- `heart_attack_china_with_who_latest_by_sex.csv`  
+  Patient-level dataset joined with WHO mean SBP indicators (latest year per province × sex).
+
+- `heart_attack_china_with_air_quality.csv`  
+  Dataset enriched with province-level PM2.5 exposure from the OpenAQ API.
+
+### Spatial Output
+- `urban_or_rural_centroids.geojson`  
+  Geocoded centroids for each province (urban and rural), derived using Wikipedia + OpenStreetMap (Nominatim) + GeoPandas.
+
+### Intermediate (Not used in analysis, but produced by scripts)
+- `province_air_quality.csv`  
+  Intermediate file storing province-level PM2.5 values before merging into the main dataset.
+
 
 ---
 
@@ -120,12 +145,13 @@ We also generate spatial datasets for mapping and centroids:
 
 | Variable Name | Type   | Units   | Description                                           | Source                            |
 |---------------|--------|---------|-------------------------------------------------------|-----------------------------------|
-| geometry      | object | –       | Province polygon geometry (used in GeoDataFrames)    | `data/external/gadm36_CHN_1.json` |
-| centroid_lon  | float  | degrees | Longitude of province centroid                        | Derived via OSMnx/Wikipedia       |
-| centroid_lat  | float  | degrees | Latitude of province centroid                         | Derived via OSMnx/Wikipedia       |
+| geometry      | object | –       | Province polygon geometry (used in GeoDataFrames)     | `data/external/gadm36_CHN_1.json` |
+| centroid_lon  | float  | degrees | Longitude of province centroid                        | Derived via Wikipedia + OpenStreetMap (Nominatim) + GeoPandas |
+| centroid_lat  | float  | degrees | Latitude of province centroid                         | Derived via Wikipedia + OpenStreetMap (Nominatim) + GeoPandas |
 | centroid_type | string | –       | Whether centroid represents an urban or rural center  | Derived (values: `Urban`, `Rural`)|
 
 These fields are written to:
 
 - `data/processed/urban_or_rural_centroids.geojson`
 - `data/processed/heart_attack_china_with_centroids.geojson`
+- `data/processed/china_heart_attack_analysis.geojson`  *(large, gitignored; used for mapping)*

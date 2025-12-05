@@ -2,10 +2,9 @@
 # DSCI 511 – Term Project (Phase 1): Scoping a Dataset
 
 > **Team:** Roy Phelps, Shad Scarboro, Leland Weeks, Evan Wessel  
-> **Dataset:** `heart_attack_china.csv` (239,266 x 28)  
-> **Repo:** (link to your GitHub repo)
+> **Dataset:** `heart_attack_china.csv`  
 
-## 1) Abstract (diverse audience)
+## 1) Abstract 
 A brief, non-technical summary (3–5 sentences): what topic, why it matters, and what this dataset
 enables (e.g., risk factors associated with heart attacks across regions).
 
@@ -56,7 +55,7 @@ How to rebuild processed data from raw:
 2) **Type cast** `Age`, `Blood_Pressure`, `CVD_Risk_Score` to numeric (with coercion); review outliers
 3) **Standardize categories** (trim/case)
 4) **Handle missingness** (categorical → "Unknown"/mode; numeric → median)
-5) **Sanity checks** (class balance for `Heart_Attack`, value ranges, category counts)
+5) **Quality checks** (class balance for `Heart_Attack`, value ranges, category counts)
 6) **Write out** → `data/processed/heart_attack_china_enriched.csv`
 
 **Folder layout & commands**
@@ -69,8 +68,5 @@ How to rebuild processed data from raw:
 - Size tables, missingness heatmap, distributions, bivariate plots.
 - Model baselines (if done later).
 
----
 
-**Grading alignment (Phase-1):** Team, topic/uses, sample, audience, limits & improvements,
-provenance & access. (See project handout.)
 
