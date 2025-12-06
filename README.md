@@ -269,6 +269,16 @@ Code used to generate derived datasets is included within this repository to ens
 
 ---
 
+## Challenges and Limitations
+
+- No timestamp information:  Without event dates, we cannot study trends over time or temporal relationships.
+- Heterogeneous data sources:  Aligning Kaggle, WHO, air quality, and OSM data required careful matching of province names and handling missing content.
+- Limited medical domain expertise:  Some clinical assumptions were made conservatively and may not relflect all nuances.
+- Potential smpling bias:  Representativeness of provinces and demographics is unknown, which limits generalizability.
+
+---
+
+
 ## Repo Structure
 
 ```text
