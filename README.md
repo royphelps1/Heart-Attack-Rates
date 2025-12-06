@@ -136,16 +136,6 @@ reports/figures/
 
 ---
 
-## Team
-
-**DSCI-511 Project Team:**
-- Evan Wessel  
-- Leland Weeks  
-- Shad Scarboro  
-- Roy Phelps  
-
----
-
 ## Project Resources
 
 - **GitHub Repository:**  
