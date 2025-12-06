@@ -287,15 +287,14 @@ Code used to generate derived datasets is included within this repository to ens
 ├── src/                 # Reusable Python modules (if needed)
 ├── tests/               # Optional unit tests
 ├── data/
-│   ├── raw/             # Original datasets
-│   ├── processed/       # Analysis-ready data
-│   └── external/        # Geographic reference data
+│   ├── raw/             # Original datasets (input to the pipeline)
+│   ├── processed/       # Analysis-ready datasets (some large files ignored via .gitignore)
+│   └── external/        # Geographic reference data (e.g., GADM)
 ├── reports/
-│   ├── paper/           # Final write-up or LaTeX paper (if needed)
-│   ├── figures/         # Plots/maps (generated locally)
-│   └── tables/          # Exported tables (if needed)
-├── docs/                # Documentation & scaffolds
-├── references/          # Citation and reference materials (or in the notebook)
-├── environment.yml      # Optional Conda environment
+│   └── figures/         # Maps and visualizations generated in Phase 2
+├── docs/                # Documentation & scaffolds (data dictionary, normalized flags, proposal docs)
+├── references/          # Citation and reference materials
+├── environment.yml      # Optional Conda environment (for reproducibility)
 ├── CONTRIBUTING.md      # Team workflow
-└── .gitignore
+└── .gitignore           # Ignore rules for datasets, outputs, LaTeX artifacts, etc.
+
