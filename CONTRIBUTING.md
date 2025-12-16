@@ -17,7 +17,6 @@ notebooks/phase1_preprocessing.ipynb
 notebooks/phase2_all_in_notebook.ipynb
 
 
-- Team members contributed by updating:
 - Notebook markdown explanations
 - Data-cleaning and feature-engineering steps
 - WHO integration logic

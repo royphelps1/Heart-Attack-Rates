@@ -37,7 +37,7 @@ This table lists the columns as detected, with inferred types and quick examples
 
 ## Normalized Columns (Phase 1 Additions)
 
-These fields come from the raw data and will be added during preprocessing to make analysis and modeling easier. We are not introducing new medical facts.
+These fields come from the raw data and will be added during preprocessing to make analysis and modeling easier. I am not introducing new medical facts.
 
 ### Boolean flags (derived from existing columns)
 
@@ -67,18 +67,18 @@ These columns will be mapped to ordered numeric values for Phase 1 EDA and later
 
 ### Missing data handling
 
-We will apply the following approach in the preprocessing notebook:
+I will apply the following approach in the preprocessing notebook:
 
 - **Categorical:** fill with `"Unknown"` or mode  
 - **Numeric:** median fill (computed per column after outlier handling)  
 
-Note: In our sample, `Education_Level` may include some missing values. We will re-check and update the Missing % in this dictionary if needed.
+Note: In my sample, `Education_Level` may include some missing values. I will re-check and update the Missing % in this dictionary if needed.
 
 ---
 
 ### Note on data leakage
 
-`CVD_Risk_Score` stays in the dataset for EDA, but we will **exclude it from any baseline predictive modeling in Phase 2** unless confirmed safe.
+`CVD_Risk_Score` stays in the dataset for EDA, but I will **exclude it from any baseline predictive modeling in Phase 2** unless confirmed safe.
 
 Province-level aggregations are used strictly for visualization and exploratory analysis, not for patient-level prediction.
 
@@ -118,7 +118,7 @@ The preprocessing and integration workflows produce the following outputs, writt
 
 ## Phase 2 – Province-Level & WHO-Enhanced Variables
 
-In Phase 2, we aggregate the patient-level dataset to province level and join World Health Organization (WHO) indicators. The main province-level variables are:
+In Phase 2, I aggregate the patient-level dataset to province level and join World Health Organization (WHO) indicators. The main province-level variables are:
 
 The variable `mean_sbp` is derived from the raw `Blood_Pressure` field and reflects province-level averages.
 
@@ -141,7 +141,7 @@ These fields appear in the following Phase 2 outputs:
 
 ## Phase 2 – Spatial & Centroid Variables
 
-We also generate spatial datasets for mapping and centroids:
+I also generated spatial datasets for mapping and centroids:
 
 | Variable Name | Type   | Units   | Description                                           | Source                            |
 |---------------|--------|---------|-------------------------------------------------------|-----------------------------------|

@@ -64,11 +64,23 @@ Icon?
 .DS_Store
 .ipynb_checkpoints/
 
+# Large Files
 data/processed/china_heart_attack_analysis.geojson
-
 data/processed/heart_attack_china_with_centroids.geojson
+DSCI-511-final Project Presentation.mp4
 
 # Power points 
 project-1.pdf
 Project-Presentation-Template.pptx
 
+# ---- Local / secrets ----
+.Rhistory
+.env
+**/.env
+
+# ---- Media / presentations ----
+*.mp4
+*.mov
+*.ppt
+*.pptx
+*.pdf
