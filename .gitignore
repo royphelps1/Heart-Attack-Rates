@@ -1,42 +1,94 @@
-# OS
+###############################################################################
+# OS / System Files
+###############################################################################
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+.Spotlight-V100
+.Trashes
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# Python / Env
+###############################################################################
+# Python
+###############################################################################
 __pycache__/
 *.py[cod]
 *.so
+*.egg-info/
+.eggs/
+build/
+dist/
+pip-wheel-metadata/
+
+###############################################################################
+# Virtual Environments
+###############################################################################
 .venv/
 venv/
+ENV/
+env/
+
+###############################################################################
+# Environment Variables / Secrets
+###############################################################################
 .env
 .env.*
 .envrc
-pip-wheel-metadata/
+**/.env
 
+###############################################################################
 # Jupyter
+###############################################################################
 .ipynb_checkpoints/
-*.ipynb_convert/
-# Don't commit huge notebook outputs by default
-**/*.ipynb_checkpoints/
-# Optionally strip outputs on commit with nbstripout
+**/.ipynb_checkpoints/
 
-# Data
-# data/raw/*
-#data/external/*
-!data/**/.gitkeep
-# Keep small sample data if needed:
-# !data/raw/sample_*.csv
+###############################################################################
+# R (since you have .Rhistory showing up)
+###############################################################################
+.Rhistory
+.RData
+.Rproj.user/
 
-# Build / Reports
-build/
-dist/
-#reports/figures/*
+###############################################################################
+# Editors / IDEs
+###############################################################################
+.vscode/
+.idea/
+*.code-workspace
+
+###############################################################################
+# Reports / Outputs
+###############################################################################
 reports/tables/*
 !reports/**/.gitkeep
 
+###############################################################################
+# Data (keep folder structure via .gitkeep)
+###############################################################################
+!data/**/.gitkeep
+
+# If you later want to ignore big raw/external datasets by default, uncomment:
+# data/raw/*
+# data/external/*
+# !data/raw/sample_*.csv
+
+###############################################################################
+# Documents / Media (keep these out of git by default)
+###############################################################################
+*.pdf
+*.ppt
+*.pptx
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+###############################################################################
 # LaTeX
+###############################################################################
 *.aux
 *.bbl
 *.blg
@@ -50,37 +102,3 @@ reports/tables/*
 *.lof
 *.run.xml
 
-# Editors / IDE
-.vscode/
-.idea/
-*.code-workspace
-*.Rhistory
-
-
-# OS-specific
-Icon?
-.Spotlight-V100
-.Trashes
-.DS_Store
-.ipynb_checkpoints/
-
-# Large Files
-data/processed/china_heart_attack_analysis.geojson
-data/processed/heart_attack_china_with_centroids.geojson
-DSCI-511-final Project Presentation.mp4
-
-# Power points 
-project-1.pdf
-Project-Presentation-Template.pptx
-
-# ---- Local / secrets ----
-.Rhistory
-.env
-**/.env
-
-# ---- Media / presentations ----
-*.mp4
-*.mov
-*.ppt
-*.pptx
-*.pdf
