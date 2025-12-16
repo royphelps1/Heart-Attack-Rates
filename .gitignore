@@ -102,3 +102,7 @@ reports/tables/*
 *.lof
 *.run.xml
 
+# Large generated GeoJSON outputs (do not commit)
+data/processed/china_heart_attack_analysis.geojson
+data/processed/heart_attack_china_with_centroids.geojson
+
